@@ -6,27 +6,52 @@
     <title>My Holiday Blog</title>
   </head>
   <body>
-    <h1>My Holiday Blog</h1>
-    <div>
-      <h2>Thanksgiving</h2>
-      <h3>November 24, 2016</h3>
-      <p>
-        Today is Thanksgiving! Turkey turkey turkey turkey.
-      </p>
-    </div>
-    <div>
-      <h2>Christmas</h2>
-      <h3>December 25, 2016</h3>
-      <p>
-        Today is Christmas! Presents presents presents presents.
-      </p>
-    </div>
-    <div>
-      <h2>New Year's</h2>
-      <h3>January 1, 2017</h3>
-      <p>
-        Today is New Year's! La la la la.
-      </p>
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <script id="entry-template" type="text/x-handlebars-template">
+      <div>
+        <h2>{{title}}</h2>
+        <h3>{{date}}</h3>
+        <p>
+          {{body}}
+        </p>
+      </div>
+    </script>
+    <script>
+      // retrieve the template HTML from the DOM
+      var entryTemplate = document.getElementById("entry-template").innerHTML;
+
+      // pass the HTML to Handlebars to compile
+      var handlebarsTemplate = Handlebars.compile(entryTemplate);
+
+      // render the Thanksgiving post
+      var thanksgivingContext = {
+        title: 'Thanksgiving',
+        date: 'November 24, 2016',
+        body: 'Today is Thanksgiving! Turkey turkey turkey turkey.'
+      };
+      
+      var thanksgivingHtml = handlebarsTemplate(thanksgivingContext);
+      document.getElementsByTagName("body")[0].innerHTML += thanksgivingHtml;
+
+      // render the Christmas post
+      var christmasContext = {
+        title: 'Christmas',
+        date: 'December 25, 2016',
+        body: 'Today is Christmas! Presents presents presents presents.'
+      };
+      
+      var christmasHtml = handlebarsTemplate(christmasContext);
+      document.getElementsByTagName("body")[0].innerHTML += christmasHtml;
+
+      // render the New Year's post
+      var newYearsContext = {
+        title: 'New Year\'s',
+        date: 'January 1, 2017',
+        body: 'Today is New Year\'s! La la la la.'
+      };
+      
+      var newYearsHtml = handlebarsTemplate(newYearsContext);
+      document.getElementsByTagName("body")[0].innerHTML += newYearsHtml;
+    </script>
   </body>
 </html>
